@@ -1,0 +1,93 @@
+<div class="flex flex-col w-full">
+    <div class="p-5 w-auto">
+        <fuse-card
+            class="flex flex-col flex-wrap p-16 w-auto w-full filter-info"
+        ><!---->
+
+            <form
+                novalidate=""
+                (ngSubmit)="findWorkoutByStudentID()"
+                [formGroup]="findWorkoutForm"
+            >
+                <ng-select
+                    class="w-full"
+                    [items]="students"
+                    [searchable]="true"
+                    (clear)="clearStudent()"
+                    bindLabel="name"
+                    bindValue="id"
+                    placeholder="Select the student"
+                    appearance="outline"
+                    formControlName="studentID"
+                >
+                </ng-select>
+                <div class="flex lex-row-reverse w-1/2">
+                    <button
+                        class="btn btn-primary"
+                        type="submit"
+                        mat-flat-button
+                        color="primary"
+                    >
+                        Find student Workouts
+                    </button>
+                </div>
+            </form>
+        </fuse-card>
+    </div>
+    <div class="flex flex-row p-5">
+
+
+        <div *ngIf="spinner">
+            <fuse-card
+                class="flex flex-col flex-wrap mr-5 p-16 h-120 w-full filter-info"
+            >
+                <mat-spinner class="flex items-center"></mat-spinner>
+            </fuse-card>
+        </div>
+        <ng-container *ngIf="!spinner">
+            <div *ngFor="let workout of workouts; let index = index">
+                <fuse-card
+                    class="flex flex-col flex-wrap mr-5 p-16  w-auto filter-info"
+                ><!---->
+                    <h4 class="text-center font-bold">Treino <Span>{{index + 1}}</Span></h4>
+                    <mat-label class="font-bold"
+                    >Repetitions:
+                        <Strong>{{
+                            workout.repetitions ? workout.repetitions : "Not Defined"
+                            }}</Strong>
+                    </mat-label>
+                    <mat-label class="font-bold"
+                    >Variation:
+                        <Strong>{{
+                            workout.variation ? workout.variation : "Not Defined"
+                            }}</Strong>
+                    </mat-label>
+                    <br/>
+                    <mat-label class="font-bold"
+                    >RestTime:
+                        <Strong>{{
+                            workout.rest_time ? workout.rest_time : "Not Defined"
+                            }}</Strong>
+                    </mat-label>
+                    <br/>
+                    <div class="border-blue-900 p-5">
+                        <mat-label class="font-bold"
+                        >Exercices:
+                            <div
+                                class="ml-4"
+                                *ngFor="let exercice of workout.exercices"
+                            >
+                                <Strong>{{ exercice.name }}</Strong>
+                                <br/>
+                            </div>
+                        </mat-label>
+                    </div>
+
+                    <br/>
+                </fuse-card>
+
+            </div>
+
+        </ng-container>
+    </div>
+</div>

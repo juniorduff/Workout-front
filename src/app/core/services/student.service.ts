@@ -51,7 +51,7 @@ export class StudentService extends BaseService {
         student: StudentData
     ): Observable<StudentData> {
         return this.http.put<Student>(
-            `http://localhost:8080/student/find-one/${studentId}`,
+            `http://localhost:8080/student/update/${studentId}`,
             student,
             this.getHeaderJson()
         );

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StudentService } from 'app/core/services/student.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -27,7 +27,8 @@ export class CreateStudentComponent implements OnInit {
         private toast: ToastrService,
         private formBuilder: FormBuilder,
         private studentService: StudentService,
-        private activedRoute: ActivatedRoute
+        private activedRoute: ActivatedRoute,
+        private _router: Router
     ) {}
 
     ngOnInit(): void {
@@ -56,15 +57,31 @@ export class CreateStudentComponent implements OnInit {
     registerStudent(): void {
         if (this.registerStudentForm.valid) {
             this.student = { ...this.registerStudentForm.value };
-            this.studentService.createStudent(this.student).subscribe({
-                next: () => {
-                    this.registerStudentForm.reset();
-                    this.toast.success('Student registration successful');
-                },
-                error: () => {
-                    this.toast.error('Ocorreu erro no servidor.');
-                },
-            });
+
+            if (this.studentIdUpdate) {
+                this.studentService
+                    .updateUser(this.studentIdUpdate, this.student)
+                    .subscribe({
+                        next: async () => {
+                            this.registerStudentForm.reset();
+                            this.toast.success('Student update successful');
+                            await this._router.navigate(['/student/list']);
+                        },
+                        error: () => {
+                            this.toast.error('Ocorreu erro no servidor.');
+                        },
+                    });
+            } else {
+                this.studentService.createStudent(this.student).subscribe({
+                    next: () => {
+                        this.registerStudentForm.reset();
+                        this.toast.success('Student registration successful');
+                    },
+                    error: () => {
+                        this.toast.error('Ocorreu erro no servidor.');
+                    },
+                });
+            }
         } else {
             this.toast.info('Atenção existem campos obrigatórios em branco');
         }

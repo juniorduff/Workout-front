@@ -49,6 +49,7 @@
                 <fuse-card
                     class="flex flex-col flex-wrap mr-5 p-16  w-auto filter-info"
                 ><!---->
+
                     <h4 class="text-center font-bold">Treino <Span>{{index + 1}}</Span></h4>
                     <mat-label class="font-bold"
                     >Repetitions:
@@ -84,10 +85,34 @@
                     </div>
 
                     <br/>
+                    <div class="flex flex-col">
+                        <button (click)="updateWorkout(workout.id)"
+                                matTooltip="Editar Informações">
+                            <mat-icon style="color:orange" svgIcon="heroicons_solid:pencil-alt"></mat-icon>
+                        </button>
+
+                    </div>
+
                 </fuse-card>
 
             </div>
 
+
         </ng-container>
+
+    </div>
+    <div class="items-center p-10" *ngIf="workouts?.length === 0">
+
+
+        <div class="grid grid-cols-2 gap-4  content-center place-content-center h-48 ...">
+            <fuse-alert
+
+                [type]="'primary'"
+                [appearance]="'border'">
+                <span fuseAlertTitle>Workouts not found</span>
+                Try create a new Workout to this student
+            </fuse-alert>
+        </div>
+
     </div>
 </div>

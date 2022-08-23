@@ -3,7 +3,12 @@
     <!-- Main -->
     <fuse-card class="flex flex-col flex-wrap p-16 w-auto w-full filter-info "><!---->
 
-        <p class="p-3  sm:text-1xl lg:text-2xl text-center border-blue-900 shadow-sm  w-full mr-5 border-left-green mt-14 font-bold">
+        <p *ngIf="studentIdUpdate"
+           class="p-3  sm:text-1xl lg:text-2xl text-center border-blue-900 shadow-sm  w-full mr-5 border-left-green mt-14 font-bold">
+            Update data of studenty
+        </p>
+        <p *ngIf="!studentIdUpdate"
+           class="p-3  sm:text-1xl lg:text-2xl text-center border-blue-900 shadow-sm  w-full mr-5 border-left-green mt-14 font-bold">
             Register a new Studenty
         </p>
         <div class="p-5 mt-5">
@@ -30,7 +35,12 @@
                     </mat-error>
                 </p>
                 <div class="flex flex-col-reverse">
-                    <button class="btn btn-primary" type="submit" mat-flat-button color="primary">Register</button>
+                    <button *ngIf="studentIdUpdate" class="btn btn-primary" type="submit" mat-flat-button
+                            color="primary">Update
+                    </button>
+                    <button *ngIf="!studentIdUpdate" class="btn btn-primary" type="submit" mat-flat-button
+                            color="primary">Register
+                    </button>
                 </div>
             </form>
 

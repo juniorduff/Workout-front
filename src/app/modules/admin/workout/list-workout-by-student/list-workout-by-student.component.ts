@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {catchError} from 'rxjs';
-import {Student} from '../../student/list-all-student/list-all-student.component';
-import {StudentService} from '../../../../core/services/student.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Exercice} from '../../exercise/types/exercice';
+import { Component, OnInit } from '@angular/core';
+import { catchError } from 'rxjs';
+import { Student } from '../../student/list-all-student/list-all-student.component';
+import { StudentService } from '../../../../core/services/student.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Exercice } from '../../exercise/types/exercice';
+import { Router } from '@angular/router';
 
 export interface Workout {
     id: string;
@@ -29,7 +30,8 @@ export class ListWorkoutByStudentComponent implements OnInit {
 
     constructor(
         private studentService: StudentService,
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private _router: Router
     ) {
         this.spinner = false;
     }
@@ -68,4 +70,10 @@ export class ListWorkoutByStudentComponent implements OnInit {
     clearStudent(): void {
         this.workouts = [];
     }
+
+    async updateWorkout(id: string): Promise<void> {
+        await this._router.navigate(['workout/update', id]);
+    }
+
+    deleteWorkout(id: string) {}
 }

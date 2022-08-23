@@ -26,7 +26,7 @@
                 <td class="text-center">{{student.email ? student.email : "E-mail não informado."}}</td>
                 <td class="text-center">{{student.phone}}</td>
                 <td class="text-center">
-                    <button (click)="editarUsuario(patient.id)"
+                    <button (click)="updateUser(student.id)"
                             matTooltip="Editar Informações">
                         <mat-icon style="color:orange" svgIcon="heroicons_solid:pencil-alt"></mat-icon>
                     </button>

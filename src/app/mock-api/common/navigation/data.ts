@@ -1,5 +1,5 @@
 /* tslint:disable:max-line-length */
-import {FuseNavigationItem} from '@fuse/components/navigation';
+import { FuseNavigationItem } from '@fuse/components/navigation';
 
 export const defaultNavigation: FuseNavigationItem[] = [
     {
@@ -49,21 +49,21 @@ export const defaultNavigation: FuseNavigationItem[] = [
     {
         id: 'exercise',
         title: 'Workout',
-        subtitle: 'Custom made page designs',
+        subtitle: 'Menage Yours Workout',
         type: 'group',
     },
     {
         id: 'exercise',
         title: 'New Workout',
         type: 'basic',
-        icon: 'heroicons_outline:user-circle',
+        icon: 'heroicons_outline:view-grid-add',
         link: '/workout/create',
     },
     {
         id: 'exercise',
         title: 'list by Student',
         type: 'basic',
-        icon: 'heroicons_outline:user-circle',
+        icon: 'heroicons_outline:trending-up',
         link: '/workout/list',
     },
 ];
